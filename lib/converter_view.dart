@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:length_converter/widget/dropdown_menu.dart';
 
-
-
 class Converter extends StatefulWidget {
   const Converter({super.key});
 
@@ -11,6 +9,12 @@ class Converter extends StatefulWidget {
 }
 
 class _ConverterState extends State<Converter> {
+  // the value of where the from the current value that to be converted
+  var _fromValue;
+
+  void _getFromValue({String? fromValue}) {
+    _fromValue = fromValue;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +25,7 @@ class _ConverterState extends State<Converter> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
+              const Text(
                 "CONVERTER",
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
@@ -30,12 +34,26 @@ class _ConverterState extends State<Converter> {
                 ),
               ),
 
-              SizedBox(
-                height: 20,
+              const SizedBox(
+                height: 45,
               ),
 
               // dropdown for from value
-              DropdownMenuWidget(),
+              DropdownMenuWidget(
+                getFromValue: _getFromValue,
+              ),
+
+              Divider(),
+
+              // TODO: study async and await and navigator
+
+              // calculate button
+              ElevatedButton(
+                onPressed: () {
+                  print(_fromValue);
+                },
+                child: Text('Press me!'),
+              )
             ],
           ),
         ));

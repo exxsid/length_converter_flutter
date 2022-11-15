@@ -7,14 +7,15 @@ const List<String> _lengthUnits = [
 ];
 
 class DropdownMenuWidget extends StatefulWidget {
-  const DropdownMenuWidget({super.key});
+  Function({String? fromValue}) getFromValue;
+
+  DropdownMenuWidget({super.key, required this.getFromValue});
 
   @override
   State<DropdownMenuWidget> createState() => _DropdownMenuWidgetState();
 }
 
 class _DropdownMenuWidgetState extends State<DropdownMenuWidget> {
-
   String dropdownValue = _lengthUnits.first;
   @override
   Widget build(BuildContext context) {
@@ -43,6 +44,7 @@ class _DropdownMenuWidgetState extends State<DropdownMenuWidget> {
             setState(() {
               dropdownValue = value!;
             });
+            widget.getFromValue(fromValue: dropdownValue);
           },
           isExpanded: true, //make true to take width of parent widget
           underline: Container(), //empty line
